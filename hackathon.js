@@ -1,39 +1,19 @@
-var locations = [
-    {
-        loc : {
-             latitude : 12,
-             longitude : 20
-        }
-    },
-    {
-        loc : {
-            latitude: 40,
-            longitude: 5
-        }
-    },
-    {
-        loc : {
-            latitude: 10,
-            longitude: 60
-        }
-    }
+var cities = [
+    'a','b','c'
 ];
-var longitudes = [];
-var latitudes = [];
-var shortestRoute = [];
-var shortestRoutes = [];
-var all_routes = [];
+const longitudee = {
+        a : 20,
+        b : 5,
+        c : 60
+    };
+const latitudes = {
+        a : 12,
+        b : 40,
+        c : 10
+    };
 
-/*//add a location
-function add(lon,lat){
-    locations.push({
-        'longitude' : lon,
-        'latitude' : lat
-    });
-}
-*/
 //Distance between 2 latitude and longitude pairs/points
-function distance(lat1,lon1,lat2,lon2) {
+function distance(lat1,lon1,lat2,lon2,) {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2-lat1);  // deg2rad below
     var dLon = deg2rad(lon2-lon1);
@@ -76,24 +56,27 @@ function perms(data){
     return permutations;
 }
 
-var lon =[];
-var lat =[];
-//Supposed to be the main calculation
-function compute(){
-    var newLocations = locations;
-    newLocations.forEach(function(currentValue,currentIndex){
-        for(num in currentValue.loc){
-            if (num == "latitude"){
-            var c = currentValue.loc.latitude;
-            lat.push(c);
-        } else if (num == "longitude") {
-            var d = currentValue.loc.longitude;
-            lon.push(d);
-        }
-    }
-});
+//Calcule Distances based on Permutation.
+function computeDistance(){
+    var value,len;
+    //Store the permutation in a string
+    value = perms(cities);
+
+    //Convert Permutation to a string and then to an array for easy traversal
+    len = value.toString().split(',');
+
+    //the permutations are in three's i.e.(abc,cba), So loop through the array in three's
+    for (var i =0; i<len.length; i+=3) {
+        var distance1= distance(longitudee[len[i]],latitudes[len[i]],longitudee[len[i+1]],latitudes[len[i+1]]);
+        var distance2= distance(longitudee[len[i+1]],latitudes[len[i+1]],longitudee[len[i+2]],latitudes[len[i+2]]);        
+        var distances= distance1 + distance2;
+        console.log(`${len[i]} => ${len[i+1]} => ${len[i+2]}`);
+        console.log(`Distance : ${Math.round(distances).toLocaleString()}Km`);
+    } 
 }
-//test distance between two points
+//test distance b/w two points
 console.log(distance(5,10,20,12));
 //test permutation
-console.log(perms(locations));
+console.log(perms(cities));
+//store the permutations in a variable
+console.log(computeDistance());
