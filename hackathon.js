@@ -1,11 +1,16 @@
+//Store cities as names or letters
 var cities = [
     'a','b','c'
 ];
+
+//Store longitude points of each city
 const longitudee = {
         a : 20,
         b : 5,
         c : 60
     };
+
+//Store latitude points of each city
 const latitudes = {
         a : 12,
         b : 40,
@@ -74,9 +79,5 @@ function computeDistance(){
         console.log(`Distance : ${Math.round(distances).toLocaleString()}Km`);
     } 
 }
-//test distance b/w two points
-console.log(distance(5,10,20,12));
-//test permutation
-console.log(perms(cities));
-//store the permutations in a variable
-console.log(computeDistance());
+//Test Function
+computeDistance();
