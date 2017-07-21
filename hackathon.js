@@ -32,7 +32,6 @@ function add(lon,lat){
     });
 }
 */
-
 //Distance between 2 latitude and longitude pairs/points
 function distance(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
